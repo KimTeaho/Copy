@@ -39,8 +39,10 @@ public class MainActivity extends ActionBarActivity
     private static final String TAB1 = "tab1";
     private static final String TAB2 = "tab2";
     private static final String TAB3 = "tab3";
+    private static final String TAB4 = "tab4";
+    private static final String TAB5 = "tab5";
 
-
+//add name test
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -76,6 +78,8 @@ public class MainActivity extends ActionBarActivity
         tabHost.addTab(tabHost.newTabSpec(TAB1).setIndicator("TAB1"), FragmentOne.class ,null);
         tabHost.addTab(tabHost.newTabSpec(TAB2).setIndicator("TAB2"), FragmentTwo.class ,null);
         tabHost.addTab(tabHost.newTabSpec(TAB3).setIndicator("TAB3"), FragmentThree.class ,null);
+        tabHost.addTab(tabHost.newTabSpec(TAB4).setIndicator("TAB4"), FragmentFour.class ,null);
+        tabHost.addTab(tabHost.newTabSpec(TAB5).setIndicator("TAB5"), FragmentFive.class ,null);
 
 
     }
