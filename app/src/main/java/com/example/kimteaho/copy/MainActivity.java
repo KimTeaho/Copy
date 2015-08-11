@@ -1,6 +1,9 @@
 package com.example.kimteaho.copy;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.NinePatch;
+import android.graphics.drawable.NinePatchDrawable;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+//import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,11 +20,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -36,11 +44,27 @@ public class MainActivity extends ActionBarActivity
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
     FragmentTabHost tabHost;
+    FragmentOne fr = new FragmentOne();
+    FragmentTwo fr2 = new FragmentTwo();
+    FragmentThree fr3 = new FragmentThree();
+    FragmentFour fr4 = new FragmentFour();
+
+    ImageView btn1;
+    ImageView btn2;
+    ImageView btn3;
+
+
+
+
     private static final String TAB1 = "tab1";
     private static final String TAB2 = "tab2";
     private static final String TAB3 = "tab3";
+    private static final String TAB4 = "tab4";
+    private static final String TAB5 = "tab5";
 
 
+//add name test
+    //test
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -51,6 +75,12 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btn1 = (ImageView)findViewById(R.id.imageView1);
+        btn2 = (ImageView)findViewById(R.id.imageView2);
+        btn3 = (ImageView)findViewById(R.id.imageView3);
+
+       // Intent intentLoginActivity = new Intent(MainActivity.this,LoginActivity.class);
+       // startActivity(intentLoginActivity);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -71,11 +101,127 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        tabHost = (FragmentTabHost)findViewById(R.id.tabhost);
+        btn1.setImageResource(R.drawable.timetable_unclicked);
+        btn2.setImageResource(R.drawable.paper_unclicked);
+        btn3.setImageResource(R.drawable.frined_unclicked);
+
+        btn1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                    btn1.setImageResource(R.drawable.timetable_clicked);
+                if (event.getAction() == MotionEvent.ACTION_UP)
+                    btn1.setImageResource(R.drawable.timetable_unclicked);
+
+                return false;
+            }
+
+        });
+
+        btn2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() ==MotionEvent.ACTION_DOWN)
+                    btn2.setImageResource(R.drawable.paper_clicked);
+                if(event.getAction() ==MotionEvent.ACTION_UP)
+                    btn2.setImageResource(R.drawable.paper_unclicked);
+
+                return false;
+
+            }
+        });
+        btn3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+               if(event.getAction() ==MotionEvent.ACTION_DOWN)
+                   btn3.setImageResource(R.drawable.friend_clicked);
+                if(event.getAction() ==MotionEvent.ACTION_UP)
+                   btn3.setImageResource(R.drawable.frined_unclicked);
+                return false;
+
+            }
+        });
+
+
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn1.setImageResource(R.drawable.timetable_unclicked);
+                FragmentManager fmm = getSupportFragmentManager();
+                FragmentTransaction fra2 =fmm.beginTransaction();
+                fra2.replace(R.id.realtabcontent,fr);
+                fra2.commit();
+
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn2.setImageResource(R.drawable.paper_unclicked);
+                FragmentManager fmm = getSupportFragmentManager();
+                FragmentTransaction fra2 =fmm.beginTransaction();
+                fra2.replace(R.id.realtabcontent,fr2);
+                fra2.commit();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn3.setImageResource(R.drawable.frined_unclicked);
+                FragmentManager fmm = getSupportFragmentManager();
+                FragmentTransaction fra2 =fmm.beginTransaction();
+                fra2.replace(R.id.realtabcontent,fr3);
+                fra2.commit();
+
+            }
+        });
+
+
+
+
+        /*tabHost = (FragmentTabHost)findViewById(R.id.tabhost);
+
         tabHost.setup(this, getSupportFragmentManager(),R.id.realtabcontent);
-        tabHost.addTab(tabHost.newTabSpec(TAB1).setIndicator("TAB1"), FragmentOne.class ,null);
-        tabHost.addTab(tabHost.newTabSpec(TAB2).setIndicator("TAB2"), FragmentTwo.class ,null);
-        tabHost.addTab(tabHost.newTabSpec(TAB3).setIndicator("TAB3"), FragmentThree.class ,null);
+        tabHost.addTab(tabHost.newTabSpec(TAB1).setIndicator("시간표"), FragmentOne.class ,null);
+        tabHost.addTab(tabHost.newTabSpec(TAB2).setIndicator("강의"), FragmentTwo.class ,null);
+        tabHost.addTab(tabHost.newTabSpec(TAB3).setIndicator("친구"), FragmentThree.class ,null);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                Toast.makeText(getApplicationContext(),tabId,Toast.LENGTH_SHORT).show();
+                if(tabId=="tab1")
+                {
+
+                    FragmentManager fmm = getSupportFragmentManager();
+                    FragmentTransaction fra2 =fmm.beginTransaction();
+                    fra2.replace(R.id.realtabcontent,fr);
+                    fra2.commit();
+                }
+                else if(tabId=="tab2")
+                {
+
+                    FragmentManager fmm = getSupportFragmentManager();
+                    FragmentTransaction fra2 =fmm.beginTransaction();
+                    fra2.replace(R.id.realtabcontent,fr2);
+                    fra2.commit();
+
+                }else
+                {
+
+                    FragmentManager fmm = getSupportFragmentManager();
+                    FragmentTransaction fra2 =fmm.beginTransaction();
+                    fra2.replace(R.id.realtabcontent,fr3);
+                    fra2.commit();
+
+                }
+
+            }
+        });*/
+
+
+       // tabHost.addTab(tabHost.newTabSpec(TAB4).setIndicator("TAB4"), FragmentFour.class ,null);
+       // tabHost.addTab(tabHost.newTabSpec(TAB5).setIndicator("TAB5"), FragmentFive.class ,null);
 
 
     }
@@ -87,12 +233,42 @@ public class MainActivity extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+        if(position ==0)
+        {
+
+            Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+            overridePendingTransition(0, 0);
+            // intent.putExtra("myid", myid); //값 전달
+            //  intent.putExtra("price", price);
+            startActivityForResult(intent, 1); // 값 받는방법
+        }
+
+
+
+        if(position ==1)
+        {
+            Intent intent = new Intent(getApplicationContext(), ReceiptActivity.class);
+            // intent.putExtra("myid", myid); //값 전달
+            //  intent.putExtra("price", price);
+            startActivityForResult(intent, 1); // 값 받는방법
+        }
+        else if(position ==2)
+        {
+            Intent intent = new Intent(getApplicationContext(), PersonalPrintActivity.class);
+            // intent.putExtra("myid", myid); //값 전달
+            //  intent.putExtra("price", price);
+            startActivityForResult(intent, 1); // 값  받는방법
+        }
+
+
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
+                Toast.makeText(getApplicationContext(),"asd",Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
@@ -134,6 +310,23 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+         //   FragmentFour fr = new FragmentFour();
+
+           // fr = new FragmentFour();
+
+         //   android.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fmm = getSupportFragmentManager();
+
+
+          //  android.app.FragmentTransaction  fra = fm.beginTransaction();
+            FragmentTransaction fra2 =fmm.beginTransaction();
+
+            //fra.replace(R.id.realtabcontent, fr);
+            fra2.replace(R.id.realtabcontent,fr4);
+            //tabHost.setup(this, getSupportFragmentManager(),R.id.realtabcontent2);
+            fra2.commit();
+
+
             return true;
         }
 
@@ -175,7 +368,20 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        if(tab.getPosition()==0)
+        {
 
+
+        }
+        else if(tab.getPosition()==1)
+        {
+            Toast.makeText(getApplicationContext(),"2222",Toast.LENGTH_SHORT).show();
+
+
+        }else
+        {
+
+        }
     }
 
     @Override

@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kimteaho.copy" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <intent-filter>
+        <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+    </intent-filter>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +23,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".LectureActivity"
+            android:label="Lecture" >
+        </activity>
+        <activity
+            android:name=".ReceiptActivity"
+            android:label="Receipt" >
+        </activity>
+        <activity
+            android:name=".PersonalPrintActivity"
+            android:label="PPrint" >
+        </activity>
+        <activity
+            android:name=".UploadActivity"
+            android:label="Upload" >
+        </activity>
+
+
     </application>
 
 </manifest>

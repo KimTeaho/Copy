@@ -7,13 +7,9 @@
     tools:context=".Tab$PlaceholderFragment">
 
 
-    <TextView android:id="@+id/section_label1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <ImageView
+    <TextView android:id="@+id/section_label4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/page1_button"
-        android:background="@drawable/ic_drawer" />
+        />
+
 </RelativeLayout>
